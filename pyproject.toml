@@ -1,0 +1,14 @@
+[project]
+name = "call_me_maybe"
+version = "0.1.0"
+description = "Introduction to function calling in LLMs"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.6",
+    "pydantic>=2.13.4",
+    "flake8>=7.3.0",
+    "mypy>=2.1.0",
+    "torch>=2.0.0",
+    "transformers>=4.40.0",
+    "huggingface-hub>=0.20.0"
+]
