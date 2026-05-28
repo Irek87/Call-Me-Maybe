@@ -9,5 +9,5 @@ class Function(BaseModel):
     returns: Dict[str, str]
 
 
-class Prompt(BaseModel):
-    body: str = Field(min_length=1)
+class UserQuery(BaseModel):
+    prompt: str = Field(min_length=1)
