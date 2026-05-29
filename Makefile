@@ -40,7 +40,7 @@ run:
 	@$(ENSURE_VENV)
 	@$(PYTHON) -m $(NAME) \
 		--functions_definition data/input/functions_definition.json \
-		--input data/input/function_calling_tests.json \
+		--input data/input/function_calling_tests_copy.json \
 		--output data/output/function_calls.json
 
 debug:

@@ -1,5 +1,10 @@
 from pydantic import BaseModel, Field
-from typing import Dict
+from typing import Dict, Any
+
+
+# class Parameter(BaseModel):
+#     name: str = Field(min_length=1)
+#     value: Any = Field()
 
 
 class Function(BaseModel):
@@ -11,3 +16,9 @@ class Function(BaseModel):
 
 class UserQuery(BaseModel):
     prompt: str = Field(min_length=1)
+
+
+class OuputItem(BaseModel):
+    prompt: str
+    name: str
+    parameters: Dict[str, Any]
