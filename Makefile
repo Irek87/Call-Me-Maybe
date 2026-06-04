@@ -7,8 +7,6 @@ PYTHON := uv run python
 NAME := src
 DIRS_TO_CLEAN := __pycache__ .mypy_cache
 FILES_TO_CLEAN := *.pyc
-EXCLUDE_NAMES_FLAKE8 := $(VENV),llm_sdk,data
-EXCLUDE_NAMES_MYPY := (^|/)($(VENV)|llm_sdk|data)/
 
 define ENSURE_VENV
 	if [ ! -d "$(VENV)" ]; then \
@@ -38,10 +36,7 @@ install:
 
 run:
 	@$(ENSURE_VENV)
-	@$(PYTHON) -m $(NAME) \
-		--functions_definition data/input/functions_definition.json \
-		--input data/input/function_calling_tests_copy.json \
-		--output data/output/function_calls.json
+	@$(PYTHON) -m $(NAME)
 
 debug:
 	@$(ENSURE_VENV)
@@ -64,19 +59,19 @@ fclean: clean
 lint:
 	@$(ENSURE_VENV)
 	echo "Checking with flake8..."
-	uv run flake8 . --exclude=$(EXCLUDE_NAMES_FLAKE8)
+	uv run flake8 $(NAME)
 	echo "flake8 check finished"
 	echo "Checking with mypy..."
-	uv run mypy . --exclude "$(EXCLUDE_NAMES_MYPY)" --warn-return-any \
+	uv run mypy $(NAME) --warn-return-any \
 		--warn-unused-ignores --ignore-missing-imports \
 		--disallow-untyped-defs --check-untyped-defs
 
 lint-strict:
 	@$(ENSURE_VENV)
 	echo "Checking with flake8..."
-	uv run flake8 . --exclude=$(EXCLUDE_NAMES_FLAKE8)
+	uv run flake8 $(NAME)
 	echo "flake8 check finished"
 	echo "Checking with mypy --strict..."
-	uv run mypy . --exclude "$(EXCLUDE_NAMES_MYPY)" --strict
+	uv run mypy $(NAME) --strict
 
 .PHONY: help install run debug clean fclean lint lint-strict
