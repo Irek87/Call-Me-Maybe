@@ -47,8 +47,8 @@ class NameChooser():
                                     .tolist())
         prompt_tokens.extend(llm.encode("</think>").flatten().tolist())
 
-        id_idx = 0
-        func_name_str = ""
+        id_idx: int = 0
+        func_name_str: str = ""
 
         while (1):
             logits = llm.get_logits_from_input_ids(
